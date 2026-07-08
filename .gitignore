@@ -1,0 +1,31 @@
+# --- Data: raw is source-of-truth but heavy; derived artifacts are reproducible ---
+data/processed/
+*.duckdb
+*.duckdb.wal
+data/raw/*.csv
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# --- ML / experiment tracking ---
+mlflow_runs/
+mlruns/
+
+# --- dbt build artifacts (all reproducible) ---
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+logs/
+
+# --- Secrets ---
+.env
+
+# --- OS / editor cruft ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
