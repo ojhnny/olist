@@ -1,0 +1,8 @@
+olist:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      # Path is relative to this dbt_project/ folder -> the shared database file
+      path: ../data/olist.duckdb
+      threads: 4

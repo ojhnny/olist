@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "One cleaned row per order. order_id is the primary key."
+    columns:
+      - name: order_id
+        description: "Primary key of an order."
+        tests: [unique, not_null]
+      - name: customer_id
+        description: "Order-scoped customer key; links to stg_customers."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: order_status
+        description: "Lifecycle state of the order."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['delivered','shipped','canceled','unavailable','invoiced','processing','created','approved']
+
+  - name: stg_customers
+    description: "One row per order-scoped customer_id; customer_unique_id is the real person."
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: customer_unique_id
+        tests: [not_null]

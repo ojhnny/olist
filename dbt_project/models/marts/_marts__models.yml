@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: mart_orders
+    description: "Order-level fact table: one row per order with customer, revenue, payment, and review measures."
+    columns:
+      - name: order_id
+        description: "Primary key."
+        tests: [unique, not_null]
+      - name: customer_unique_id
+        description: "The real customer (person) behind the order."
+        tests: [not_null]
+      - name: total_order_value
+        description: "Item price + freight; 0 for item-less orders."
+        tests: [not_null]
+
+  - name: mart_customer_metrics
+    description: "Customer-level RFM table: one row per customer_unique_id (delivered orders only)."
+    columns:
+      - name: customer_unique_id
+        description: "Primary key — the real customer."
+        tests: [unique, not_null]
+      - name: recency_days
+        description: "Days from the customer's last order to the dataset snapshot date."
+        tests: [not_null]
+      - name: frequency
+        description: "Count of delivered orders."
+        tests: [not_null]
+      - name: monetary
+        description: "Total delivered order value."
+        tests: [not_null]

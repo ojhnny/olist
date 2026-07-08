@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: raw
+    description: >
+      Untouched mirror of the Olist source CSVs, loaded by scripts/load_raw.py.
+      Never edited — all cleaning happens downstream in staging models.
+    schema: raw
+    tables:
+      - name: customers
+      - name: geolocation
+      - name: orders
+      - name: order_items
+      - name: order_payments
+      - name: order_reviews
+      - name: products
+      - name: sellers
+      - name: product_category_translation
